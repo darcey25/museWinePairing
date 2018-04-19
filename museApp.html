@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="appBackground">
+
+<head>
+  <meta charset="utf-8">
+  <title>The Muse of Meals</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Lobster" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+</head>
+
+<body>
+  <main class="wrapper">
+    <ul id="slide-out" class="side-nav fixed">
+      <div class="brandTitle">
+        <a href="index.html"><h4 class="brandName">Muse of Meals</h4></a>
+      </div>
+      <hr class="hrTitle">
+      <div class="row">
+        <h5 class="cursive subtitle">Cooking</h5>
+        <hr class="hrTitle">
+        <div class="input-field col s12">
+          <select multiple class="icons" id="cuisine" style="margin-bottom: 60px;">
+              <option value="null" disabled selected>Choose your style</option>
+              <option value="american">American</option>
+              <option value="asian">Asian</option>
+              <option value="cajun">Cajun & Creole</option>
+              <option value="french">French</option>
+              <option value="indian">Indian</option>
+              <option value="italian">Italian</option>
+              <option value="japanese">Japanese</option>
+              <option value="mediterranean">Mediterranean</option>
+              <option value="mexican">Mexican</option>
+              <option value="southwestern">Southwestern</option>
+            </select>
+          <label>Select your Cuisine</label>
+        </div>
+        <div multiple class="input-field col s12">
+          <select class="icons" id="meat">
+              <option value="null" disabled selected>Choose your meat</option>
+              <option value="beef">Beef</option>
+              <option value="chicken">Chicken</option>
+              <option value="duck">Duck</option>
+              <option value="fish">Fish</option>
+              <option value="lamb">Lamb</option>
+              <option value="pork">Pork</option>
+              <option value="seafood">Seafood</option>
+              <option value="vegetarian">Vegetarian</option>
+            </select>
+          <label>Select your Protein</label>
+        </div>
+        <div class="input-field col s12">
+          <select multiple class="icons" id="ingredients">
+              <option value="null" disabled selected>Choose your options</option>
+              <option value="beans">Beans</option>
+              <option value="fruit">Fruit</option>
+              <option value="garlic">Garlic</option>
+              <option value="greens">Greens</option>
+              <option value="onion">Onion</option>
+              <option value="pasta">Pasta</option>
+              <option value="potato">Potato</option>
+              <option value="rice">Rice</option>
+              <option value="tofu">Tofu</option>
+              <option value="tomato">Tomato</option>
+              <option value="zucchini">Zucchini</option>
+            </select>
+          <label>Specific Ingredients</label>
+        </div>
+        <div class="input-field col s12">
+          <select multiple class="icons" id="allergies">
+              <option value="null" disabled selected>Choose your restictions</option>
+              <option value="gluten">Gluten</option>
+              <option value="lactose">Lactose</option>
+              <option value="nuts">Nuts</option>
+              <option value="seafood">Seafood</option>
+            </select>
+          <label>Allergies</label>
+        </div>
+        <div class="row">
+          <hr class="hrTitle">
+          <a class="waves-effect waves-light btn" id="searchFood"><i class="material-icons right">restaurant_menu</i>Lets Cook!</a>
+        </div>
+      </div>
+    </ul>
+    <div class="col s12 m12 l12" id="mainContent">
+      <div class="main">
+        <a href="#" data-activates="slide-out" class="button-collapse show-on-large red" id="search"><i class="hamburgerIcon material-icons">search</i></a>
+        <h4 id="tempText">Waiting for your choices to inspire your meal</h4>
+        <div class="row" id="cardHolder">
+          <div class="col s12 m5 l4 offset-m1 offset-l3 foodCard">
+          </div>
+          <div class="col s12 m5 l4 wineCard" hidden="true">
+            <div class="card">
+              <div class="card-content wineInfo">
+              </div>
+              <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                  <li class="tab" id="tab1"><a class="active" href="#test1">Option 1</a></li>
+                  <li class="tab" id="tab2"><a href="#test2">Option 2</a></li>
+                  <li class="tab" id="tab3"><a href="#test3">Option 3</a></li>
+                </ul>
+              </div>
+              <div class="card-content grey darken-3 wineName" style="color: white; text-align: center">
+                <div id="test1">Test 1</div>
+                <div id="test2">Test 2</div>
+                <div id="test3">Test 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Button Modal  -->
+    <div class="fixed-action-btn horizontal click-to-toggle modalStyle">
+      <a class="btn-floating btn red ">
+      <i class="large material-icons">menu</i>
+    </a>
+      <ul id="list">
+        <li href="#modal6" class="recipes waves-effect waves-light btn modal-trigger  red modalPadding miniButton">My Recipes</li>
+        <li id="logIn" href="#modal3" class="waves-effect waves-light btn modal-trigger  red modalPadding miniButton">Sign In</li>
+        <li id="logOut" class="waves-effect waves-light btn modal-trigger  red modalPadding miniButton btnHide">Log Out</li>
+        <li href="#modal1" class="waves-effect waves-light btn modal-trigger  red modalPadding miniButton">Info</li>
+        <li href="#modal2" class="waves-effect waves-light btn modal-trigger  red modalPadding miniButton">feedback</li>
+      </ul>
+    </div>
+    <!-- Modal1 - Info Modal-->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Hello Fine Diners!</h4>
+        <h5>Lets get Started</h5>
+        <p>This is a very fun and easy to use app that helps all of us when in doubt of our culinary expertise. By mixing and matching the perfect meal starting on your style of cuisine all the way down to ingredients , sides and much more. Then we take
+          all your ideas and we move forward with our very unique and cautious drink pairing that will be a perfect complement for your meal and occasion.</p>
+        <p>So, first things first choose a Style (this is fun) then move down the list of options. Not sure what to pick? Don't sweat it , we will find a great recommendation just for you. Next click on drink menu and we will do the magic for you and pair
+          your meal with a great drink selection to go with it. Making you the star of the night while enjoying something unique and Delicious. hint: its ok to be creative ;) </p>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">I'm Ready</a>
+        </div>
+      </div>
+    </div>
+    <!-- Modal2 - Feedback Modal  -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <h4>We want to hear from You!</h4>
+        <label for="textarea1">Tell us More</label>
+        <textarea id="textarea1" class="materialize-textarea"></textarea>
+        <label for="feedbackName">Name</label>
+        <input id="feedbackName" type="text" class="validate">
+      </div>
+      <div class="modal-footer">
+        <a href="#!" id="text1" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+      </div>
+    </div>
+    <!-- Modal3 - Sign in -->
+    <div id="modal3" class="modal">
+      <div class="modal-content">
+        <h4>Create an Account</h4>
+        <label for="icon_prefix">Name</label>
+        <input id="icon_prefix" type="text" class="validate">
+        <div class="input-field col s12">
+          <input id="txtEmail" type="email" placeholder="Email" class="validate">
+          <!--  <label for="email">Email</label> -->
+        </div>
+        <div class="input-field col s12">
+          <input id="txtPassword" type="password" placeholder="Password" class="validate">
+          <!--  <label for="password">Password</label> -->
+        </div>
+        <div class="modal-footer">
+          <button href="#!" id="btnLogin" class="modal-action modal-close waves-effect waves-green btn-flat btn btn action">Login</button>
+          <button href="#!" id="btnSignUp" class="modal-action modal-close waves-effect waves-green btn-flat btn btn secondary">Sign Up</button>
+          <button href="#!" id="btnLogOut" class="modal-action modal-close waves-effect waves-green btn-flat btn btn hide">Log Out</button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal4 - Ajax Error -->
+    <div id="modal4" class="modal">
+      <div class="modal-content">
+        <h4>Opppps!</h4>
+        <p id="errorMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+    <!-- Modal5 - Validation Modal -->
+    <div id="modal5" class="modal">
+      <div class="modal-content">
+        <h4>Opppps!</h4>
+        <p>We need more information from you, please select a protein!</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+    <!-- Modal6 - Recipe Box -->
+    <div id="modal6" class="modal bottom-sheet">
+      <div class="modal-content row">
+        <div class="col s6">
+          <h4>Saved Recipes</h4>
+          <table class="savedRecipes">
+          </table>
+        </div>
+        <div class="col s6">
+          <h4>Saved Wines</h4>
+          <table class="savedWines">
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+      </div>
+    </div>
+    <!--Push for Sticky Footer-->
+    <div class="push">
+    </div>
+  </main>
+  <footer class="footer page-footer grey darken-3">
+    <div class="footer-copyright grey darken-3">
+      <div class="container">
+        <p class="footerContent">© Copyright Group1 UT BootCamp Jan-2018</p>
+        <p class="footerContent">Grant Ferrell, Mario Garza, Alex Gonzalez, Elliot Reymond-Christensen</p>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
+  <script src="assets/javascript/firebase.js"></script>
+</body>
+
+</html>
