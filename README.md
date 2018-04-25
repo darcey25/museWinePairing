@@ -49,7 +49,7 @@ Muse works by calling the Yummly and Snooth APIs. Yummly is through two API call
 
 ## How to run the program
 
-You can simply go to https://ejreymond-christensen.github.io/muse-wine-pairing/ to go to the landing page. Or you can go to muse-wine-pairing repo and download the repo. Simply open `index.html` in your favorite browser and start cooking.
+You can simply go to https://darcey25.github.io/museWinePairing/ to go to the landing page. Or you can go to muse-wine-pairing repo and download the repo. Simply open `index.html` in your favorite browser and start cooking.
 
 
 **Bon Appétit**
