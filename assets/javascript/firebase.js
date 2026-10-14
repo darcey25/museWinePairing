@@ -115,7 +115,8 @@ $(document).on("click", ".saveRecipeBtn", function(){
     userRef.once("value").then(function(snapshot) {
       $(".savedRecipes").empty();
       snapshot.forEach(function(childSnapshot) {
-        $(".savedRecipes").append("<div><a href='"+childSnapshot.val().url+"' target='_blank'>"+childSnapshot.val().name+"</a></div>");
+        var savedUrl = /^https?:\/\//i.test(childSnapshot.val().url) ? childSnapshot.val().url : "#";
+        $(".savedRecipes").append($("<div>").append($("<a target='_blank' rel='noopener'>").attr("href", savedUrl).text(childSnapshot.val().name)));
       });
     });
     $(this).attr("active", "false");
@@ -148,7 +149,7 @@ $(document).on("click", ".saveWineBtn1", function(){
     userRefwine.once("value").then(function(snapshot) {
       $(".savedWines").empty();
       snapshot.forEach(function(childSnapshot) {
-        $(".savedWines").append("<div>"+childSnapshot.val().wine+"</div>");
+        $(".savedWines").append($("<div>").text(childSnapshot.val().wine));
       });
     });
     savedWine1 = true;
@@ -174,7 +175,7 @@ $(document).on("click", ".saveWineBtn2", function(){
     userRefwine.once("value").then(function(snapshot) {
       $(".savedWines").empty();
       snapshot.forEach(function(childSnapshot) {
-        $(".savedWines").append("<div>"+childSnapshot.val().wine+"</div>");
+        $(".savedWines").append($("<div>").text(childSnapshot.val().wine));
       });
     });
     savedWine2 = true;
@@ -200,7 +201,7 @@ $(document).on("click", ".saveWineBtn3", function(){
     userRefwine.once("value").then(function(snapshot) {
       $(".savedWines").empty();
       snapshot.forEach(function(childSnapshot) {
-        $(".savedWines").append("<div>"+childSnapshot.val().wine+"</div>");
+        $(".savedWines").append($("<div>").text(childSnapshot.val().wine));
       });
     });
     savedWine3 = true;

@@ -1,3 +1,9 @@
+// API credentials were removed from source control. Yummly and Snooth have both
+// shut down their public APIs, so recipe and wine search no longer return data.
+var YUMMLY_APP_ID = "";
+var YUMMLY_APP_KEY = "";
+var SNOOTH_API_KEY = "";
+
 var recipeName="";
 var recipeURL="";
 var wineName="";
@@ -32,7 +38,7 @@ $(document).ready(function() {
       var allergies = $("#allergies").val();
       var cuisine = $("#cuisine").val();
       var ingredients = $("#ingredients").val().join("+");
-      var queryURL = "https://api.yummly.com/v1/api/recipes?_app_id=78251404&_app_key=ae65a091779f9ce10b68bb9d74e5ebdf&q=" + meat + "+" + ingredients + "&maxResult=50&requirePictures=true";
+      var queryURL = "https://api.yummly.com/v1/api/recipes?_app_id=" + YUMMLY_APP_ID + "&_app_key=" + YUMMLY_APP_KEY + "&q=" + meat + "+" + ingredients + "&maxResult=50&requirePictures=true";
       //Adds the allergy types to API call
       for (var y = 0; y < allergies.length; y++) {
         if (allergies[y] === "gluten") {
@@ -119,7 +125,7 @@ $(document).ready(function() {
   //Function to Get Specific Recipe Info from Yummly, this is the second API request.
   function newRecipe() {
 
-    var queryURL = "https://api.yummly.com/v1/api/recipe/" + getRecipeId + "?_app_id=78251404&_app_key=ae65a091779f9ce10b68bb9d74e5ebdf";
+    var queryURL = "https://api.yummly.com/v1/api/recipe/" + getRecipeId + "?_app_id=" + YUMMLY_APP_ID + "&_app_key=" + YUMMLY_APP_KEY + "";
     $.ajax({"url": queryURL, "method": "GET"}).done(function(response) {
       console.log(response.name);
       recipeName= response.name;
@@ -215,7 +221,7 @@ $(document).ready(function() {
     }
 
     //Snooth Wine API Function
-    var queryURL = "https://api.snooth.com/wines/?akey=mhf90w0jypw8fx3cukga31eas2yinav1c7w0xalhucisslg6&q=" + wineType + "+wine&n=50&xp=30&c=US";
+    var queryURL = "https://api.snooth.com/wines/?akey=" + SNOOTH_API_KEY + "&q=" + wineType + "+wine&n=50&xp=30&c=US";
     $.ajax({"url": queryURL, "dataType": "JSON", "method": "GET"}).done(function(wineData) {
       wineList = wineData;
       showWineOptions();
